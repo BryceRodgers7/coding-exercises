@@ -4,6 +4,22 @@
 # Input: [1,3,2,3,4,3,5]
 # Output: 3
 
+
+
+
+
+
+
+
+
+
+
+
+from collections import Counter
+def most_frequent2(arr):
+    counts = Counter(arr)
+    return max(counts, key=counts.get)
+
 def most_frequent(arr):
     # create array where position = num in the input array
     # increment value in position as you see the number
@@ -36,6 +52,22 @@ def most_frequent(nums):
 # Input: s="listen", t="silent"
 # Output: True
 
+
+
+
+
+
+
+
+
+
+
+
+
+from collections import Counter
+def is_anagram(s, t):
+    # check the count of each letter in both strings
+    return Counter(s) == Counter(t)
 
 from collections import Counter
 def is_anagram(s, t):
