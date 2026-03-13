@@ -3,6 +3,8 @@
 # nums=[1,2,4,6,10]
 # target=8
 
+# REMEMBER, ITS SORTED!!
+
 # wrong answer
 def target_sum(nums, target):
     # scan thru adding current position to every other position
