@@ -17,6 +17,25 @@
 
 
 
+def sum_to_k(nums, k):
+    # calculate prefix sums in a hashmap
+    # scan thru looking for prefix - k = some previous prefix
+
+    prefix_sums = {0: 1}
+    current_sum = 0
+    result = 0
+
+    for i in range(len(nums) - 1):
+        current_sum += nums[i]
+        
+        if (current_sum - k in prefix_sums):
+            result += prefix_sums[current_sum - k]
+
+        prefix_sums[current_sum] = prefix_sums.get(current_sum, 0) + 1
+
+    return result
+
+
 def sum_subarr(nums, k):
     # scan thru and track current running sum, and how many times we've seen that sum before in a hashmap (prefix_sum_counts)
     # if we see that current running sum (aka prefix_sum) - k matches another prefix, then the subarray between i & current (j) is valid

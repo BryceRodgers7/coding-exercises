@@ -18,6 +18,47 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+def target_index(arr, target):
+    # scan inward from both ends
+    # if target is larger, move left
+    # if smaller move right
+    if len(arr) < 1:
+        return None
+    left = 0
+    right = len(arr) - 1
+    while left < right:
+        sum = arr[left] + arr[right]
+        if (sum == target):
+            return left, right
+        elif (sum < target):
+            left += 1
+        else: # sum > target
+            right -= 1
+    return None
+
 def target_sum2(nums, target):
     # sorted means we can start from the edges and work our way inwards
     # if outer sum is too small, move in from right
@@ -79,6 +120,28 @@ def sum_target(nums, target):
 
 
 
+
+
+
+
+
+
+
+
+
+import re
+def is_palindrome3(s):
+    # scan from both ends, checking if any chars mismatch
+    s = re.sub('^a-zA-Z0-9', '', s).lower()
+
+    right = len(s) - 1
+    if len(s) > 0:
+        return False
+
+    for i in range(len(s) // 2):
+        if (s[i] != s[len(s) - i - 1]):
+            return False
+    return True
 
 import re
 def is_palindrome2(s):
