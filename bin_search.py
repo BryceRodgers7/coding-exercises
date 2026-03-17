@@ -2,28 +2,118 @@
 # Find the index of target in a sorted array.
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 def find_target(arr, target):
-    # check middle element
-    # if element too small, go left 50% otherwise go right 50%
-    index = len(arr) // 2
-    return recursive(arr, index, target)
+    # calculate mid-point for min/max possible index and check
+    left = 0
+    right = len(arr)-1
 
-def recursive(arr, index, target):
-    if arr:
-        length = len(arr)
-        if target == arr[index]:
-            return index
-        elif target > arr[index]:
-            return recursive(arr, index + (length - index) // 2, target)
-        else: #target < arr[index]
-            return recursive(arr, index - (length - index) // 2, target)
-
+    while left <= right:
+        m = ( right + left ) // 2
+        if arr[m] == target:
+            return m
+        elif arr[m] > target:
+            right = m - 1
+        else: #arr[m] < target
+            left = m + 1
+    return -1
 
 
 
-    # InOrder traversal is L N R
-    return inOrder(arr)
 
-def inOrder(arr):
-    if True:
-        return False
+# Question 2
+
+# Find the first occurrence of a number in a sorted array.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+def first_occur(arr, target):
+    # calculate mid-point for min/max possible index and check
+    # after found, scan left 
+    left = 0
+    right = len(arr)-1
+
+    while left <= right:
+        m = ( right + left ) // 2
+        if arr[m] == target:
+            while m >= 0:
+                if m == 0:
+                    if arr[m] == target:
+                        return 0
+                    else:
+                        return 1
+                m -= 1
+                if arr[m] != target:
+                    return m + 1
+        elif arr[m] > target:
+            right = m - 1
+        else: #arr[m] < target
+            left = m + 1
+    return -1
+
+# or just reduce right by 1 even when arr[m] == target  OR  change the m-1 logic to >= from strictly >
