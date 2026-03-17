@@ -17,6 +17,46 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+def count_subarrays(arr, k):
+    # calculate prefix sums, scan thru looking for current_sum - k equal to any previous prefix
+
+    prefix_sums = {0 : 1}
+    current_sum = 0
+    count = 0
+
+    for i in range(len(arr) - 1):
+        current_sum += arr[i]
+
+        if current_sum - k in (prefix_sums):
+            count += prefix_sums[current_sum - k]
+
+        prefix_sums[current_sum] = prefix_sums.get(current_sum, 0) + 1
+
+    return count
+
+
 def sum_to_k(nums, k):
     # calculate prefix sums in a hashmap
     # scan thru looking for prefix - k = some previous prefix
@@ -25,7 +65,7 @@ def sum_to_k(nums, k):
     current_sum = 0
     result = 0
 
-    for i in range(len(nums) - 1):
+    for i in range(len(nums)):
         current_sum += nums[i]
         
         if (current_sum - k in prefix_sums):
@@ -73,6 +113,49 @@ def sum_subarr(nums, k):
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# create class that takes an array as constructor
+class fast_range_sums:
+    # initialize prefix_sums on creation
+    
+
+    def __init__(self, arr):
+        self.prefix_sums = [0]
+        running_sum = 0
+
+        for i in range(len(arr)):
+            running_sum += arr[i]
+            self.prefix_sums.append(running_sum)
+
+    # sumRange will subtract prefix[j] from prefix[i] and return
+    def sumRange(self, i, j):
+        if i < 0 or j >= len(self.prefix_sums) - 1 or i > j:
+            return None
+        
+        return self.prefix_sums[j + 1] - self.prefix_sums[i]
+    
 
 
 

@@ -41,6 +41,15 @@
 
 
 
+
+
+
+from collections import Counter
+def most_freq(arr):
+    # use Counters hash, return key with max value
+    counts = Counter(arr)
+    return max(counts, key=counts.get)
+
 from collections import Counter
 def most_freq(arr):
     # scan thru, create hash of counts for each value
@@ -111,6 +120,17 @@ def most_frequent(nums):
 
 
 
+
+
+
+
+
+
+
+from collections import Counter
+def is_anagram(s, t):
+    # check if Counter objects match
+    return Counter(s) == Counter(t)
 
 from collections import Counter
 def is_anagram(s, t):
