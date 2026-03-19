@@ -1,6 +1,6 @@
 # Question 1
 # Find the index of target in a sorted array.
-# arr = [-1, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+# arr = [-1, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]   target = 7
 
 
 
@@ -38,8 +38,23 @@
 
 
 
+def find_target_index(nums, target):
+    # repeatedly check midpoint, then exclude the half of the sorted array it cannot be in
+    if not nums or len(nums) < 1:
+        return -1
 
+    left = 0
+    right = len(nums) - 1
 
+    while left <= right:
+        m = (left + right) // 2
+        if nums[m] == target:
+            return m
+        elif nums[m] < target:
+            left = m + 1
+        else: # nums[m] > target
+            right = m - 1
+    return -1
 
 def find_trgt(arr, target):
     # check middle, look half-way to the right or left if larger/smaller
@@ -80,7 +95,7 @@ def find_target(arr, target):
 # Question 2
 
 # Find the first occurrence of a number in a sorted array.
-# arr = [1, 1, 2, 2, 2, 2, 3, 4, 5, 6]
+# arr = [1, 1, 2, 2, 2, 2, 3, 4, 5, 6]   target = 2
 
 
 
@@ -114,6 +129,34 @@ def find_target(arr, target):
 
 
 
+
+
+
+
+
+
+
+def first_occur(nums, target):
+    # repeatedly check midpoint, then eliminate half 
+    # once found, scan left until no match
+    
+    result = -1
+    if not nums or len(nums) < 1:
+        return result
+
+    left = 0
+    right = len(nums) - 1
+    
+    while left <= right:
+        m = (left + right) // 2
+        if nums[m] == target:
+            result = m 
+            right = m - 1
+        elif nums[m] < target:
+            left = m + 1
+        else: # nums[m] > target
+            right = m - 1
+    return result
 
 
 def first_occur(arr, target):

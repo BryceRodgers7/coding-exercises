@@ -39,6 +39,24 @@
 
 
 
+
+def num_sum_subarrays(nums, k):
+    # create prefix_sum hash, along the way scan for any case where (current_sum - k) is in prefix_sums
+    
+    prefix_sums = {0 : 1}
+    cur_sum = 0
+    result = 0
+
+    for i in nums:
+        cur_sum += i
+
+        if cur_sum - k in prefix_sums:
+            result += prefix_sums[cur_sum - k]
+
+        prefix_sums[cur_sum] = prefix_sums.get(cur_sum, 0) + 1
+
+    return result
+
 def count_subarrays(arr, k):
     # calculate prefix sums, scan thru looking for current_sum - k equal to any previous prefix
 
@@ -46,8 +64,8 @@ def count_subarrays(arr, k):
     current_sum = 0
     count = 0
 
-    for i in range(len(arr) - 1):
-        current_sum += arr[i]
+    for num in arr:
+        current_sum += num
 
         if current_sum - k in (prefix_sums):
             count += prefix_sums[current_sum - k]
@@ -104,6 +122,7 @@ def sum_subarr(nums, k):
 # Question 2
 # Create a class that supports fast range sum queries.
 # sumRange(i,j) inclusive
+# array sample = [5, 6, 7, 8, 9, 11, -1, 22, 0, 24]
 
 
 
@@ -135,6 +154,31 @@ def sum_subarr(nums, k):
 
 
 
+
+
+
+
+
+
+
+
+
+
+# create prefix_sums array and subtract element i from element j
+class myClass():
+
+    def __init__(self, arr):
+        self.prefix_sums = [0]
+        cur_sum = 0
+
+        for num in arr:
+            cur_sum += num
+            self.prefix_sums.append(cur_sum)
+
+    def sumRange(self, i, j):
+        if i > j or i < 0 or j >= len(self.prefix_sums) - 1:
+            return None
+        return self.prefix_sums[j + 1] - self.prefix_sums[i]
 
 # create class that takes an array as constructor
 class fast_range_sums:

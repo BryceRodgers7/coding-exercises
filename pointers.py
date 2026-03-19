@@ -38,6 +38,34 @@
 
 
 
+
+
+
+
+
+
+
+
+def get_sum_indicies(nums, target):
+    # scan inwards summing both ends, if target > current_sum move up from left, else move down from right
+    if not nums or len(nums) < 2:
+        return None
+    
+    left = 0
+    right = len(nums) - 1
+    current_sum = 0
+
+    while left < right:
+        current_sum = nums[left] + nums[right]
+        if current_sum == target:
+            return left, right
+        elif current_sum < target:
+            left += 1
+        else: # current_sum > target
+            right -= 1
+    
+    return None
+
 def sum_index(arr, target):
     # scan inwards from both ends, moving one side or the other based on > or < target
     if len(arr) < 1:
@@ -121,6 +149,59 @@ def sum_target(nums, target):
 # "A man, a plan, a canal: Panama"
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+import re
+def is_palindrome(s):
+    # scan inwards from both ends, looking for any chars that do not match
+    s = re.sub('^a-zA-Z0-9', '', s).lower()
+
+    if len(s) == 0:
+        return False
+
+    for i in range(len(s) // 2):
+        if s[i] != s[len(s) - 1 - i]:
+            return False
+        
+    return True
+
+
 import re
 def is_palindrome(s):
     # scan inwards looking for chars that do not match
@@ -139,7 +220,6 @@ def is_palindrome3(s):
     # scan from both ends, checking if any chars mismatch
     s = re.sub('^a-zA-Z0-9', '', s).lower()
 
-    right = len(s) - 1
     if len(s) == 0:
         return False
 

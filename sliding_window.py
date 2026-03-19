@@ -42,6 +42,23 @@
 
 
 
+def max_sum(nums, k):
+    # scan thru adding only next num and subtracting last num, checking for max
+    if not nums or len(nums) < k or k <= 0:
+        return None
+    
+    cur_sum = sum(nums[:k])
+    result = cur_sum
+
+    for i in range(len(nums) - k):
+        cur_sum += nums[i + k]
+        cur_sum -= nums[i]
+
+        if cur_sum > result:
+            result = cur_sum
+
+    return result
+
 def max_sum_subarray(nums, k):
     # calculate sum of first k elements, then scan thru adding next & removing previous
     
@@ -152,6 +169,36 @@ def biggest_subarr_btr(nums, k):
 
 
 
+
+
+
+
+
+
+
+
+def longest_substr(s):
+    # scan thru keeping track of 'seen' with a set
+    # if the next char is 'seen', remove from the left until not-seen, check for max length / set size
+    result = 0
+    if not s or len(s) < 1:
+        return result
+    
+    seen = set()
+    left = 0
+
+    for i in range(len(s)):
+
+        while s[i] in seen:
+            seen.remove(s[left])
+            left += 1
+
+        seen.add(s[i])
+
+        if len(seen) > result:
+            result = len(seen)
+    
+    return result
 
 def longest_substr(s):
     # keep track of seen characters with a set
