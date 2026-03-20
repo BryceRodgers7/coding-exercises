@@ -40,6 +40,27 @@
 
 
 
+
+
+
+
+
+
+def has_cycle(ll):
+    # scan thru linked list at 2x speed and 1x, check if they are ever the same
+    if not ll:
+        return None
+    
+    slow = fast = ll
+    while fast and fast.next:
+        slow = slow.next
+        fast = fast.next.next
+        if slow == fast:
+            return True
+        
+    return False
+
+
 def has_cycle(ll):
     # scan at 2x and 1x speed, check if they're ever the same
     fast = slow = ll
@@ -120,6 +141,28 @@ def has_cycle(ll):
 
 
 
+
+
+
+
+
+
+
+
+
+def find_midpoint(ll):
+    # scan thru ll at 2x speed and 1x, return 1x node when 2x finds the end
+    if not ll:
+        return None
+    slow = fast = ll
+
+    while fast and fast.next:
+        slow = slow.next
+        fast = fast.next.next
+        if (slow == fast):
+            return None
+        
+    return slow
 
 def find_mid_ll(ll):
     # scan at 2x speed and 1x, return 1x node when 2x reaches the end

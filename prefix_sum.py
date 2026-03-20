@@ -40,6 +40,32 @@
 
 
 
+
+
+
+
+
+
+def num_subarrays(arr, k):
+    # calculate prefix sums hash, checking for any current_sum - k in prefix sums (if so add count for that prefix_sum to running total)
+    if not arr:
+        return 0
+
+    prefix_sums = {0 : 1}
+    cur_sum = 0
+    count = 0
+
+    for i in range(len(arr)):
+        cur_sum += arr[i]
+
+        if cur_sum - k in prefix_sums:
+            count += prefix_sums[cur_sum - k]
+
+        prefix_sums[cur_sum] = prefix_sums.get(cur_sum, 0) + 1
+
+    return count
+
+
 def num_sum_subarrays(nums, k):
     # create prefix_sum hash, along the way scan for any case where (current_sum - k) is in prefix_sums
     
@@ -162,6 +188,31 @@ def sum_subarr(nums, k):
 
 
 
+
+
+
+
+
+
+class fastSummer():
+    # calculate prefix_sums then subtract prefix_sums[i] from prefix_sums[j]
+
+    def __init__(self, arr):
+        if not arr:
+            return None
+        
+        self.prefix_sums = [0]
+        cur_sum = 0
+
+        for i in range(len(arr)):
+            cur_sum += arr[i]
+            self.prefix_sums.append(cur_sum)
+
+    def sumRange(self, i, j):
+        if i < 0 or j > (len(self.prefix_sums) - 2) or i > j:
+            return None
+        
+        return self.prefix_sums[j + 1] - self.prefix_sums[i]
 
 
 # create prefix_sums array and subtract element i from element j

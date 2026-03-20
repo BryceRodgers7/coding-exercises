@@ -44,6 +44,24 @@
 
 
 
+
+
+def all_subsets(arr):
+    # backtrack from empty set
+    # recursively add current set to result then call again for all remaining elements
+
+    result = []
+
+    def backtrack(next_start_index, current_subset):
+        result.append(current_subset)
+
+        for i in range(next_start_index, len(arr)):
+            backtrack(i + 1, current_subset + [arr[i]])
+
+    backtrack(0, [])
+    return result
+
+
 def gen_subsets(arr):
     # starting with empty set, call recursive method 
     # recursive method adds the current set, then for each remaining element, calls with that element + the current subset
@@ -119,6 +137,29 @@ def all_subsets(arr):
 
 
 
+
+
+
+
+
+
+def all_perms(arr):
+    # backtrack recursively starting with empty set
+    # add current set to result then call backtrack for all remaining elements
+
+    result = []
+
+    def backtrack(remaining, current_subset):
+        if not remaining or len(remaining) == 0:
+            result.append(current_subset)
+            return
+
+        for i in range(len(remaining)):
+            backtrack(remaining[:i] + remaining[i + 1:],
+                      current_subset + [remaining[i]])
+            
+    backtrack(arr, [])
+    return result
 
 
 def all_perms(arr):

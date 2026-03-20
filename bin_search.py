@@ -38,6 +38,33 @@
 
 
 
+
+
+
+
+
+
+
+
+
+def find_target(arr, target):
+    # repeatedly check midpoint, eliminate half of remaining space
+    if not arr or len(arr) < 1:
+        return -1
+    left = 0
+    right = len(arr) - 1
+
+    while left <= right:
+        m = ( left + right ) // 2
+        if arr[m] == target:
+            return m
+        elif arr[m] > target:
+            right = m - 1
+        else: # arr[m] < target
+            left = m + 1
+
+    return -1
+
 def find_target_index(nums, target):
     # repeatedly check midpoint, then exclude the half of the sorted array it cannot be in
     if not nums or len(nums) < 1:
@@ -135,6 +162,41 @@ def find_target(arr, target):
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+def first_occur(arr, target):
+    # repeatedly check midpoint, then eliminate half of the search space
+    # if found at midpoint, repeatedly search left with same logic
+
+    result = -1
+    left = 0
+    right = len(arr) - 1
+
+    if not arr or len(arr) < 1:
+        return result
+    
+    while left <= right:
+        m = ( left + right ) // 2
+        if arr[m] == target:
+            result = m
+            right = m - 1
+        elif arr[m] < target:
+            m = left + 1
+        else: # arr[m] > target
+            m = right - 1
+
+    return result
 
 def first_occur(nums, target):
     # repeatedly check midpoint, then eliminate half 

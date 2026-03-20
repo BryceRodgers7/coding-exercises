@@ -45,6 +45,25 @@
 
 
 
+def find_sum_indecies(arr, target):
+    # scan inward from edges, move in left or right depending if higher or lower
+    if not arr or len(arr) < 2:
+        return None
+    
+    left = 0
+    right = len(arr) - 1
+    current_sum = 0
+
+    while left < right:
+        current_sum = arr[left] + arr[right]
+        if current_sum == target:
+            return [left, right]
+        elif current_sum < target:
+            right -= 1
+        else: # current_sum > target
+            left += 1
+
+    return None
 
 def get_sum_indicies(nums, target):
     # scan inwards summing both ends, if target > current_sum move up from left, else move down from right
@@ -184,6 +203,31 @@ def sum_target(nums, target):
 
 
 
+
+
+
+
+
+
+
+import re
+def is_palindrome(s):
+    # scan inwards from edges, checking for non-matching chars
+
+
+    if not s:
+        return None
+    
+    s = re.sub('^a-zA-Z0-9', '', s).lower()
+
+    if len(s) == 0:
+        return False
+
+    for i in range(len(s) // 2):
+        if s[i] != s[len(s) - i - 1]:
+            return False
+        
+    return True
 
 
 
