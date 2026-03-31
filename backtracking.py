@@ -145,23 +145,27 @@ def all_subsets(arr):
 
 
 
+def all_perms(arr):
+    # write a backtrack funciton and call it with an empty array
+    # in backtrack, scan thru the remaining elements, adding the current element & calling again for all remaining elems
 
+    if not arr:
+        return None
 
+    result = []
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    def backtrack(current_perm, remaining):
+        if not remaining or len(remaining) < 1:
+            result.append([current_perm])
+            return
+        
+        for i in range(len(remaining)):
+            backtrack(current_perm + [remaining[i]],
+                      remaining[:i] + remaining[i+1:])
+            
+    backtrack([], arr)
+    return result
+            
 
 def all_perms(arr):
     # start with empty set, backtrack; appending the current subset & again backtracking for all remaining elements
@@ -177,7 +181,7 @@ def all_perms(arr):
             return
                       
         for i in range(len(remaining)):
-            backtrack(cur_subset + [arr[i]], remaining[:i] + remaining[i + 1:])
+            backtrack(cur_subset + [remaining[i]], remaining[:i] + remaining[i + 1:])
 
     backtrack([], arr)
     return result

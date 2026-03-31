@@ -44,8 +44,25 @@
 
 
 
+def find_in_sorted(arr, target):
+    # repeat: check midpoint, eliminate half of the search space
 
+    if not arr or len(arr) < 1:
+        return None
+    
+    left = 0
+    right = len(arr) - 1
 
+    while left <= right:
+        midpoint = (left + right) // 2
+        if target == arr[midpoint]:
+            return midpoint
+        elif target > arr[midpoint]:
+            left = midpoint + 1
+        else: # target < arr[midpoint]
+            right = midpoint - 1
+
+    return None
 
 def find_target(arr, target):
     # repeatedly check midpoint, eliminate half of remaining space
@@ -174,6 +191,33 @@ def find_target(arr, target):
 
 
 
+
+
+
+
+
+def find_first_in_sorted(arr, target):
+    # repeat: check midpoint, eliminate half of the remaining search space
+    # keep track of result, if found at midpoint continue searching left
+
+    if not arr or len(arr) < 1:
+        return -1
+    
+    left = 0
+    right = len(arr) - 1
+    result = -1
+
+    while left <= right:
+        midpoint = (left + right) // 2
+        if target == arr[midpoint]:
+            result = midpoint
+            right = midpoint - 1
+        elif target > arr[midpoint]:
+            left = midpoint + 1
+        else: # target < arr[midpoint]
+            right = midpoint - 1
+
+    return result
 
 def first_occur(arr, target):
     # repeatedly check midpoint, then eliminate half of the search space
