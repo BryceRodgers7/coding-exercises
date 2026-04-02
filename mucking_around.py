@@ -134,3 +134,54 @@ def merge_sorted(a, b):
 
 
 
+
+
+# Write a Python function group_anagrams(strs) that groups anagrams together. Return a list of lists.
+
+# example: words = ['bat', 'tab', 'blah', 'holla', 'holal', 'alloh'] should return a list with 3 lists (last 3 words, first 2 words, and 3rd word alone)
+
+def group_anagrams(strs):
+    groups = {}
+
+    for word in strs:
+        key = sorted(word)
+        if key not in groups:
+            groups[key] = []
+        groups[key].append(word)
+
+    return list(groups.values())
+
+# this seems correct, should I lower-case everything & remove whitespace? 
+# complexity: this runs in O(n) time and uses O(n) extra space
+
+# WRONG, no lower-case. sorted(word) returns a list which is not hashable, need to wrap that in tuple() to make it a hashable key. Also the run-time is O(N * k log k) because k elements need to be sorted , each taking log(k) time.
+
+
+ 
+
+
+
+
+
+
+
+
+ # Write a Python function top_k_frequent(nums, k) that returns the k most frequent elements in the list.
+
+
+def top_k_frequent(nums, k):
+    freq = {}
+
+    for n in nums:
+        if n in freq:
+            freq[n] += 1
+        else:
+            freq[n] = 1
+
+    sorted_items = sorted(freq.items(), key=lambda x: x[1])
+
+    result = []
+    for i in range(k):
+        result.append(sorted_items[i][0])
+
+    return result
