@@ -438,4 +438,342 @@ def is_not_empty(nums):
         return True
     
 
+
+
+
+
+
+
+
+
+
+
+
+# 1. Reverse a string (3 ways)
+
+# No slicing            - loop creating a second string
+# With slicing          - ::-1
+# In-place (list)       - swap first & last, work inwards
+
+
+def reverse_str(s):
+    result = ""
+    for i in len(s):
+        result.append(s[len(s) - 1 - i])
+    return result
+
+
+def reverse_str(s):
+    return s[::-1]
+
+def reverse_str(s):
+    for i in (len(s) // 2):
+        ch = s[i]
+        s[i] = s[(len(s) - 1 - i)]
+        s[len(s) - 1 - i] = ch
+    return s
+
+
+# 2. What does this output?
+
+a = [1, 2, 3]
+b = a
+b.append(4)
+print(a)
+
+# result is [1, 2, 3, 4]  
+# because b = a is not a copy its a pointer
+
+
+
+# 3. Default mutable argument trap
+
+def add_item(item, lst=[]):
+    lst.append(item)
+    return lst
+
+print(add_item(1))
+print(add_item(2))
+
+# result is [1]  then   [1, 2]
+
+
+# 4. List vs Generator
+# What’s the difference in memory and execution?
+
+[x*x for x in range(10)]
+(x*x for x in range(10))
+
+# first line creates a list of squares, second line creates a tuple of squares 
+# the list is mutable, the tuple is not
+
+
+
+# 5. Dict comprehension
+
+# convert
+
+[("a", 1), ("b", 2)]
+
+# into 
+
+{"a": 1, "b": 2}
+
+# answer:
+lst = [("a", 1), ("b", 2)]
+dic = dict(lst)
+
+
+
+
+# 6. What does this slice do?
+
+s = "abcdef"
+print(s[::2])
+print(s[::-1])
+
+# first line prints "bdf" second line prints "fedcba"
+
+
+
+# 7. Sorting trick
+
+# Sort list of dicts by "age" descending.
+
+sorted_lst = sorted(lst, key="age", reverse=True)
+
+
+
+# 8. Set vs List
+
+# When would you use a set?
+
+# use a set when you don't want duplicates and you don't care about order
+
+
+
+# 9. What’s the output?
+
+print(bool([]), bool([0]), bool(0))
+
+# results are: False, False, False
+
+
+
+# 10. Lambda usage
+
+# Rewrite following using lambda:
+
+def square(x): return x*x
+
+
+lambda x: x*x
+
+
+
+
+
+# 1
+# a = [1, 2, 3]
+b = a[:]
+b.append(4)
+print(a)
+
+
+[1, 2, 3, 4]
+
+
+
+#2 
+def func(x, lst=[]):
+    lst.append(x)
+    return lst
+
+print(func(1))
+print(func(2))
+
+[1]
+[1, 2]
+
+
+# 3
+print("".join(sorted("cba")))
+
+"abc"
+
+
+# 4
+x = [1, 2, 3]
+print(x * 2)
+
+[2, 4, 6]
+
+
+# 5
+print(bool("False"), bool(""))
+
+("True", "False")
+
+
+# 6.
+d = {"a": 1, "b": 2}
+print("a" in d)
+print(1 in d)
+
+True
+False
+
+
+# 7
+x = (1, 2, 3)
+print(x[1:])
+
+[2, 3]
+
+
+# 8
+a = [1, 2, 3]
+b = a
+a = a + [4]
+print(b)
+
+[1, 2, 3, 4]
+
+
+# WHAT'S WRONG section
+# 9
+def remove_even(nums):
+    for i in range(len(nums)):
+        if nums[i] % 2 == 0:
+            nums.pop(i)
+    return nums
+
+
+# modifying the number of elements in a list inside the loop causes IndexErrors
+
+
+
+# 10
+def add_to_dict(key, value, d={}):
+    d[key] = value
+    return d
+
+# the state of d persists across calls
+
+
+
+# 11
+def is_palindrome(s):
+    return s == s.reverse()
+
+# s.reverse() will reverse the string in-place
+
+
+# SHORT CODING SECTION
+# 12
+# Return the first non-repeating character, or None.
+# Example:  "leetcode" → "l"    "aabb" → None
+
+def first_unique_char(s):
+    counts = {}
+    for ch in s:
+        counts[ch] = counts.get(ch, 0) + 1
+    for ch in s:
+        if counts[ch] == 1:
+            return ch
     
+    return None        
+
+
+
+# 13
+# Flatten nested lists of arbitrary depth.
+# Example:  [1, [2, [3, 4]], 5] → [1, 2, 3, 4, 5]
+
+
+def flatten(lst):
+    result = []
+
+    def backtrack(x):
+        for num in x:
+            if isinstance(num, int):
+                result.append(num)
+            else:
+                backtrack(x)
+
+    backtrack(lst)
+    return result
+
+
+
+
+# 14
+# Return the k most frequent elements.
+
+def top_k(nums, k):
+
+    if k >= len(nums):
+        return nums
+    
+    counts = {}
+    for n in nums:
+        counts[n] = counts.get(n, 0) + 1
+    
+    lst = counts.sorted(key=lambda x: x[1], reverse=True)
+    result = []
+
+    for i in range(k):
+        result.append(lst[i][0])
+
+    return result
+
+
+
+# quick reasoning
+# 15
+# Time complexity of:
+for i in range(n):
+    for j in range(i):
+        print(i, j)
+
+# time O(n^2) because each element loops through up to n elements 
+
+
+# 16
+# Best data structure for:
+# Frequent membership checks + no duplicates
+# Answer: set
+
+
+# 17
+# What does this return?
+list(set([1, 2, 2, 3]))
+
+[1, 2, 3]
+
+
+
+
+# 18
+# Difference between:  list and   tuple  (1–2 sentences)
+
+# A list is mutable, a tuple is not.
+
+
+
+
+# PRACTICAL section
+# 19
+# How would you prevent duplicate API requests from creating duplicate records?
+
+# ensure idempotency by caching requests / responses
+
+
+
+
+# 20
+# What is the main benefit of using a cache?
+
+# it gives you the result without having to recompute / recalculate from the input.
+
+
