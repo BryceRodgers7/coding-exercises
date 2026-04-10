@@ -732,9 +732,9 @@ def top_k(nums, k):
 # quick reasoning
 # 15
 # Time complexity of:
-for i in range(n):
-    for j in range(i):
-        print(i, j)
+# for i in range(n):
+#     for j in range(i):
+#         print(i, j)
 
 # time O(n^2) because each element loops through up to n elements 
 
@@ -777,3 +777,27 @@ list(set([1, 2, 2, 3]))
 # it gives you the result without having to recompute / recalculate from the input.
 
 
+
+
+
+
+
+
+
+def longest_unique_substr(s):
+# use two sliding window, outer loop grows, inner loop shrinks when next char is seen
+  seen = set()
+  left = 0
+  count = 0
+  for i in range(len(s)):
+    while s[i] in seen:
+      seen.remove(s[left])
+      left += 1
+    seen.add(s[i])
+    if len(seen) > count:
+      count = len(seen)
+  return count
+
+
+
+longest_unique_substr("aabcdeefgijklllmn")
