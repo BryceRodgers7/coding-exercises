@@ -45,6 +45,62 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+def find_two_idx_sum(arr, target):
+
+    # scan inwards from both sides one step at a time until they cross or sum to the target
+
+    if not arr or len(arr) < 2:
+        return None
+    
+    left = 0 
+    right = len(arr) - 1
+
+    while left < right:
+        cur_sum = arr[left] + arr[right]
+        if cur_sum == target:
+            return [left, right]
+        elif cur_sum > target:
+            right -= 1
+        else: # cur_sum < target
+            left += 1
+
+    return None
+
+
+
+def find_sum_indicies(arr, target):
+
+    # scan inwards from both ends, adding & checking
+
+    if not arr or len(arr) < 2:
+        return None
+
+    right = len(arr) - 1
+    left = 0
+
+    while left < right:
+        sum = arr[left] + arr[right]
+        if sum == target:
+            return (left, right)
+        elif sum > target:
+            right -= 1
+        else: # sum < target
+            left += 1
+
+    return None
+
 def find_sum_indecies(arr, target):
     # scan inward from edges, move in left or right depending if higher or lower
     if not arr or len(arr) < 2:
@@ -52,16 +108,15 @@ def find_sum_indecies(arr, target):
     
     left = 0
     right = len(arr) - 1
-    current_sum = 0
 
     while left < right:
         current_sum = arr[left] + arr[right]
         if current_sum == target:
             return [left, right]
         elif current_sum < target:
-            right -= 1
-        else: # current_sum > target
             left += 1
+        else: # current_sum > target
+            right -= 1
 
     return None
 
@@ -72,7 +127,6 @@ def get_sum_indicies(nums, target):
     
     left = 0
     right = len(nums) - 1
-    current_sum = 0
 
     while left < right:
         current_sum = nums[left] + nums[right]
@@ -154,9 +208,9 @@ def sum_target(nums, target):
 
         if (s == target):
             return [left, right]
-        elif (s < target):
-            right -+ 1
-        else: # s > target
+        elif (s > target):
+            right -= 1
+        else: # s < target
             left += 1
     return None            
 
@@ -210,6 +264,45 @@ def sum_target(nums, target):
 
 
 
+
+
+
+
+
+import re
+
+def is_palindrome(s):
+
+    # scan inwards from both sides, looking for any chars that do not match
+
+    s = re.sub(r"[^a-z0-9]", '', s.lower())
+
+    for i in range(len(s) // 2):
+        if s[i] != s[len(s) - i - 1]:
+            return False
+        
+    return True
+
+
+import re
+
+def is_palindrome(text):
+
+    # scan inward from both ends checking if each char matches
+
+    if not text:
+        return True
+
+    text = re.sub(r'[^a-z0-9]', '', text.lower())
+
+    for i in range(len(text) // 2):
+        if text[i] != text[len(text) - i - 1]:
+            return False
+        
+    return True
+
+
+
 import re
 def is_palindrome(s):
     # scan inwards from edges, checking for non-matching chars
@@ -218,7 +311,7 @@ def is_palindrome(s):
     if not s:
         return None
     
-    s = re.sub('^a-zA-Z0-9', '', s).lower()
+    s = re.sub('[^a-zA-Z0-9]', '', s).lower()
 
     if len(s) == 0:
         return False
@@ -234,7 +327,7 @@ def is_palindrome(s):
 import re
 def is_palindrome(s):
     # scan inwards from both ends, looking for any chars that do not match
-    s = re.sub('^a-zA-Z0-9', '', s).lower()
+    s = re.sub('[^a-zA-Z0-9]', '', s).lower()
 
     if len(s) == 0:
         return False
@@ -249,7 +342,7 @@ def is_palindrome(s):
 import re
 def is_palindrome(s):
     # scan inwards looking for chars that do not match
-    s = re.sub('^a-zA-Z0-9', '', s).lower()
+    s = re.sub('[^a-zA-Z0-9]', '', s).lower()
 
     if len(s) == 0:
         return False
@@ -262,7 +355,7 @@ def is_palindrome(s):
 import re
 def is_palindrome3(s):
     # scan from both ends, checking if any chars mismatch
-    s = re.sub('^a-zA-Z0-9', '', s).lower()
+    s = re.sub('[^a-zA-Z0-9]', '', s).lower()
 
     if len(s) == 0:
         return False
@@ -275,7 +368,7 @@ def is_palindrome3(s):
 import re
 def is_palindrome2(s):
     # scan inwards from both ends, checking if letters match
-    s = re.sub('^a-zA-Z0-9', '', s).lower()
+    s = re.sub('[^a-zA-Z0-9]', '', s).lower()
     if len(s) == 0:
         return False
     left = 0

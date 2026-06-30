@@ -39,6 +39,58 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+def most_freq(arr):
+
+    # create a counts dict and keep track of highest count
+
+    if not arr or len(arr) < 1:
+        return None
+    
+    counts = {}
+    most_freq = arr[0]
+    freq = 0
+
+    for num in arr:
+        counts[num] = counts.get(num, 0) + 1
+        if counts[num] > freq:
+            freq = counts[num]
+            most_freq = num
+
+    return most_freq
+
+def most_freq(arr):
+
+    # scan thru and create dict of counts
+
+    if not arr or len(arr) < 1:
+        return None
+    
+    counts = {}
+    high_num = arr[0]
+    freq = 0
+    
+    for num in arr:
+        counts[num] = counts.get(num, 0) + 1
+
+        if counts[num] > freq:
+            high_num = num
+            freq = counts[num]
+
+    return high_num
+
 from collections import Counter
 def most_freq(arr):
     # use Counter from collections, get key with highest value
@@ -141,6 +193,51 @@ def most_frequent(nums):
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+def is_anagram(s, t):
+
+    # scan thru both words, create two counts dicts and check if they are equal
+
+    if len(s) != len(t):
+        return False
+    
+    counts_s = {}
+    counts_t = {}
+
+    for c in s:
+        counts_s[c] = counts_s.get(c, 0) + 1
+
+    for c in t:
+        counts_t[c] = counts_t.get(c, 0) + 1
+
+    return counts_s == counts_t
+
+def is_anagram(s, t):
+    # scan thru both, building a count dict, check if both count dicts are equal
+
+    if len(s.strip()) != len(t.strip()):
+        return False
+
+    s_counts = {}
+    t_counts = {}
+
+    for c in s.lower():
+        s_counts[c] = s_counts.get(c, 0) + 1
+
+    for c in t.lower():
+        t_counts[c] = t_counts.get(c, 0) + 1
+    
+    return s_counts == t_counts 
 
 from collections import Counter
 def is_anagram(s, t):

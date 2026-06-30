@@ -44,6 +44,57 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+def max_subarray_k(arr, k):
+
+    # scan thru with sliding window, adding next & subtracting last, checking for max
+
+    if not arr or len(arr) < k or k <= 0:
+        return None
+    
+    hi = cur_sum = sum(arr[:k])
+    
+    for i in range(len(arr) - k):
+        cur_sum += arr[k + i]
+        cur_sum -= arr[i]
+        if cur_sum > hi:
+            hi = cur_sum
+
+    return hi
+
+
+def max_subarray(arr, k):
+
+    # scan thru adding next number & subtracting last number, checking for new high
+
+
+    if not arr or len(arr) < k or k <= 0:
+        return None
+
+    current_sum = sum(arr[:k])
+    high = current_sum
+
+    for i in range(k, len(arr)):
+        current_sum += arr[i]
+        current_sum -= arr[i - k]
+        if current_sum > high:
+            high = current_sum
+        
+    return high
+
+
 def sum_subarr(arr, k):
     # sum first k, then scan thru adding next element & subtracting previous element
 
@@ -208,6 +259,35 @@ def biggest_subarr_btr(nums, k):
 
 
 
+
+
+
+
+
+
+
+
+
+def longest_nonrep_substr(s):
+
+    # scan thru with 2 pointers, maintain set of seen chars, shrink when next is seen & grow when next is unseen
+
+    if not s:
+        return -1
+    
+    left = 0
+    seen = set()
+    result = 0
+
+    for i in range(len(s)):
+        while s[i] in seen:
+            seen.remove(s[left])
+            left += 1
+        seen.add(s[i])
+        if len(seen) > result:
+            result = len(seen)
+
+    return result
 
 
 def longest_substr(s):

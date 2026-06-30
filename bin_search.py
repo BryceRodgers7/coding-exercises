@@ -44,6 +44,61 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+def find_idx(arr, target):
+
+    # repeatedly check midpoint & eliminate half the search space
+    if not arr or len(arr) < 1:
+        return -1
+
+    left = 0
+    right = len(arr) - 1
+
+    while left <= right:
+        mid = (left + right) // 2
+        if arr[mid] == target:
+            return mid
+        elif arr[mid] > target:
+            right = mid - 1
+        else: # arr[mid] < target
+            left = mid + 1
+
+    return -1
+
+def find_target_index(arr, target):
+
+    # repeatedly check mid-point, then check midpoint of remaining (higher or lower) search space
+
+    if not arr or len(arr) < 1:
+        return -1
+
+    left = 0
+    right = len(arr) - 1
+    
+    while left <= right:
+        mid = (left + right) // 2
+        if arr[mid] == target:
+            return mid
+        elif arr[mid] > target:
+            right = mid - 1
+        else: # arr[mid] < target
+            left = mid + 1
+
+    return -1
+
 def find_in_sorted(arr, target):
     # repeat: check midpoint, eliminate half of the search space
 
@@ -190,10 +245,51 @@ def find_target(arr, target):
 
 
 
+def first_occur(arr, target):
+    # repeatedly check midpoint & eliminate half the remaining search space
+    # work left-wards after finding the target to check for first occurrance
 
+    if not arr or len(arr) < 1:
+        return -1
 
+    left = 0
+    right = len(arr) - 1
+    result = -1
 
+    while left <= right:
+        mid = (left + right) // 2
+        if arr[mid] == target:
+            result = mid
+            right = mid - 1
+        elif arr[mid] < target:
+            left = mid + 1
+        else: # arr[mid] > target
+            right = mid - 1
 
+    return result
+
+def first_occurrence_target(arr, target):
+    # repeatedly scan midpoint, then eliminate half of the search space
+    # continue scanning left & updating return index until not found
+
+    if not arr or len(arr) < 1:
+        return -1
+    
+    left = 0
+    right = len(arr) - 1
+    result = -1
+
+    while left <= right:
+        mid = (left + right) // 2
+        if arr[mid] == target:
+            result = mid
+            right = mid - 1
+        if arr[mid] > target:
+            right = mid - 1
+        else: # arr[mid] < target
+            left = mid + 1
+
+    return result
 
 
 def find_first_in_sorted(arr, target):

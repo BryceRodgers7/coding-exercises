@@ -46,6 +46,52 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+def has_cycle(ll):
+
+    # scan thru at 2x speed and 1x speed, looking for when both pointers are the same
+
+    if not ll:
+        return False
+    
+    slow = fast = ll
+
+    while fast and fast.next:
+       
+        slow = slow.next
+        fast = fast.next.next
+
+        if slow == fast:
+            return True
+
+    return False
+
+def has_cycle(ll):
+
+    if not ll:
+        return None
+    
+    fast = ll
+    slow = ll
+
+    while fast and fast.next:
+        slow = slow.next
+        fast = fast.next.next
+        if (fast == slow):
+            return True
+        
+    return False
+
 def has_cycle(ll):
     # scan thru linked list at 2x speed and 1x, check if they are ever the same
     if not ll:
@@ -148,6 +194,50 @@ def has_cycle(ll):
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+def find_middle(ll):
+
+    # scan thru ll at 2x speed and 1x speed, return slow pointer when fast reaches the end
+
+    if not ll:
+        return None
+    
+    slow = fast = ll
+
+    while fast and fast.next:
+        slow = slow.next
+        fast = fast.next.next
+
+        if slow == fast:
+            return None
+
+    return slow
+
+def find_mid(ll):
+    # scan thru with fast & slow pointers, return slow after fast reaches the end
+
+    if not ll:
+        return None
+    
+    fast = slow = ll
+    while fast and fast.next:
+        slow = slow.next
+        fast = fast.next.next
+
+        if slow == fast:
+            return None
+
+    return slow
 
 
 def find_midpoint(ll):
