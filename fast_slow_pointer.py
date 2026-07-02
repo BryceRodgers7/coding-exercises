@@ -193,16 +193,21 @@ def has_cycle(ll):
 
 
 
+def find_mid_ll(ll):
+    # scan thru at 2x and 1x speed, stop when 2x reaches the end & return 1x pointer
+    if not ll:
+        return None
+    
+    slow = fast = ll
 
+    while fast and fast.next:
+        slow = slow.next
+        fast = fast.next.next
 
-
-
-
-
-
-
-
-
+        if slow == fast:
+            return None
+        
+    return slow
 
 
 def find_middle(ll):

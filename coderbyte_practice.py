@@ -56,6 +56,7 @@ def most_transactions(transactions: list[str]) -> list[str]:
 
     result = []
 
+    # also return ties for highest count
     for trans in transList:
         if trans[1] == highest_trans_count:
             result.append(trans[0])
@@ -156,6 +157,33 @@ def sort_tickets(tickets: list[dict[str, any]]) -> list[dict[str,any]]:
 
 
 
+
+
+
+
+def valid_parenths(s: str):
+    # create stack, add/pop as you see parenths in the string & check for correctness
+
+    if not s:
+        return True
+    
+    stack = []
+
+    valid = {'[' : ']', '{' : '}', '(' : ')'}
+
+    for ch in s:
+        if ch in valid:
+            stack.append(valid[ch])
+        else:
+            if not stack or ch != stack.pop():
+                return False
+            
+
+    if not stack:
+        return True
+    else:
+        return False
+
 # parenthesis check problem
 def check_parenths(s: str) -> bool:
 
@@ -220,6 +248,21 @@ meter_ids = [
     "M002"
 ]
 
+
+
+def find_dups(meter_ids: list[str]) -> list[str]:
+    # create counts-hash, build result from all counts > 1
+    if not meter_ids:
+        return []
+    
+    counts = {}
+
+    for item in meter_ids:
+        counts[item] = counts.get(item, 0) + 1
+
+    result = [meter_id for meter_id, count in counts.items() if count > 1]
+
+    return result
 
 def find_dups(ids: list[str]) -> list[str]:
     dups = []
@@ -333,3 +376,133 @@ def convert_str_to_int(uses: list[str]) -> list[int]:
     ints = list(map(lambda x: int(x), uses))
 
     return ints
+
+
+
+def sum_two_indicies(nums: list[int], target: int) -> tuple[int, int] | None:
+    # keep track of what's seen and what's needed, scan thru once
+
+    if not nums or len(nums) < 2:
+        return None
+    
+    seen = {}
+
+    for i, num in enumerate(nums):
+        needed = target - num
+
+        if needed in seen:
+            return (i, seen[needed])
+        
+        seen[num] = i
+
+    return None
+
+# 1 two sum indicies (unsorted)
+
+def two_sum_indices(nums: list[int], target: int) -> tuple[int, int] | None:
+    seen = {}
+
+    for i, num in enumerate(nums):
+        needed = target - num
+
+        if needed in seen:
+            return (seen[needed], i)
+
+        seen[num] = i
+
+    return None
+        
+
+
+def merge_intervals(intervals: list[list[int]]) -> list[list[int]] | None:
+    # sort intervals, scan thru looking for overlapping & build new result
+    
+    if not intervals:
+        return None
+
+    result = []
+
+    intervals = sorted(intervals, key=lambda x: x[0])
+
+    last_int = intervals[0]
+
+    for interval in intervals[1:]:
+        if interval[0] < last_int[1]:
+            last_int = [last_int[0], max(last_int[1], interval[1])]
+        else:
+            result.append(last_int)
+            last_int = interval
+
+    result.append(last_int)
+
+    return result
+        
+
+# 2 merge time intervals
+
+
+def merge_intervals(intervals: list[list[int]]) -> list[list[int]]:
+    # scan through pairs looking for position 0 inside the current interval, create merged result along the way
+
+    if not intervals:
+        return []
+    
+    intervals = sorted(intervals, key=lambda x: x[0])
+
+    result = []
+    prev_int = intervals[0]
+
+    for interval in intervals[1:]:
+        if interval[0] < prev_int[1]:
+            prev_int = [
+                prev_int[0],
+                max(prev_int[1], interval[1])
+            ]
+        else:
+            result.append(prev_int)
+            prev_int = interval
+        
+    result.append(prev_int)
+
+    return result
+
+
+
+def first_non_rep(s: str) -> int:
+    # create counts hash, scan through looking for char with count == 1
+
+    if not s:
+        return -1
+    
+    counts = {}
+
+    for ch in s:
+        counts[ch] = counts.get(ch, 0) + 1
+
+    for i, ch in enumerate(s):
+        if counts[ch] == 1:
+            return i
+        
+    return -1
+
+
+# 3 first non-repeating character
+
+def first_non_rep_char(s: str) -> int:
+    # create a counts hash for each char then return the first char with a non-1 value
+
+    if not s:
+        return -1
+    
+    counts = {}
+
+    for ch in s:
+        counts[ch] = counts.get(ch, 0) + 1
+
+    for i, ch in enumerate(s):
+        if counts[ch] == 1:
+            return i
+        
+    return None
+
+

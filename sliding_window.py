@@ -4,58 +4,21 @@
 # k=3
 
 
+def max_sum(nums: list[int], k: int):
+    # scan thru keeping a running total, add next/subtract last & compare to running max
 
+    if not nums or len(nums) < k or k <= 0:
+        return -1
+    
+    curr_sum = sum(nums[:k])
+    max_sum = curr_sum
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    for i in range(k, len(nums)):
+        curr_sum += nums[i] - nums[i - k]
+        if curr_sum > max_sum:
+            max_sum = curr_sum
+        
+    return max_sum
 
 def max_subarray_k(arr, k):
 
@@ -224,49 +187,28 @@ def biggest_subarr_btr(nums, k):
 
 
 
+def longest_substr(s: str) -> int:
+    # scan thru, use set to keep track of seen chars, shrink set from left if current char is already in set
+
+    if not s:
+        return -1
+    
+    seen = set()
+    left = right = longest = 0
 
 
+    for ch in s:
+        while ch in seen:
+            seen.remove(s[left])
+            left += 1
+        
+        seen.add(ch)
+        right += 1
 
+        if len(seen) > longest:
+            longest = len(seen)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    return longest
 
 def longest_nonrep_substr(s):
 

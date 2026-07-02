@@ -239,9 +239,27 @@ def find_target(arr, target):
 
 
 
+def first_occur(arr: list[int], target: int) -> int:
+    # repeatedly check midpoint & eliminate half of the search space, if found keep searching left
 
+    if not arr or not target:
+        return -1
+    
+    left = 0
+    right = len(arr) - 1
+    result = -1
+    
+    while left <= right:
+        midpoint = (left + right) // 2
+        if arr[midpoint] == target:
+            result = midpoint
+            right = midpoint - 1
+        elif arr[midpoint] > target:
+            right = midpoint - 1
+        else: # arr[midpoint] < target
+            left = midpoint + 1
 
-
+    return result
 
 
 
