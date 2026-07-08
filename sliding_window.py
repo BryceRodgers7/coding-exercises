@@ -4,6 +4,48 @@
 # k=3
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 def max_sum(nums: list[int], k: int):
     # scan thru keeping a running total, add next/subtract last & compare to running max
 
